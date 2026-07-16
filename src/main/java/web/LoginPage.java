@@ -4,11 +4,11 @@ import org.openqa.selenium.By;
 
 public class LoginPage extends BasePage{
 
-    private String loginErrorMessage = "Epic sadface: Username and password do not match any user in this service";
-    private By usernameField = By.id("user-name");
-    private By passwordField = By.id("password");
-    private By loginButton= By.id("login-button");
-    private By loginErrorHeader = By.className("error-message-container");
+    final String loginErrorMessage = "Epic sadface: Username and password do not match any user in this service";
+    final By usernameField = By.id("user-name");
+    final By passwordField = By.id("password");
+    final By loginButton= By.id("login-button");
+    final By loginErrorHeader = By.className("error-message-container");
 
     // Base Methods
     public String getLoginErrorMessage(){
