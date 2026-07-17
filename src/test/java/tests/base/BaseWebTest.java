@@ -1,12 +1,14 @@
 package tests.base;
 
-import config.ConfigReader;
+import drivers.config.ConfigReader;
+import drivers.factory.WebDriverFactory;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import web.BasePage;
 import web.LoginPage;
+
+import java.io.ObjectInputFilter;
 
 public class BaseWebTest {
 
@@ -16,8 +18,7 @@ public class BaseWebTest {
 
     @BeforeClass
     public void setUp(){
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
+        driver = new WebDriverFactory().createInstance(ConfigReader.getProperty("web.browser"));
         driver.get(ConfigReader.getProperty("web.baseUrl"));
         basePage = new BasePage();
         basePage.setDriver(driver);
