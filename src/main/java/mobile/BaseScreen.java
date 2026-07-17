@@ -20,7 +20,7 @@ public class BaseScreen {
     }
 
     // Convenience
-    public void tapInto(WebElement element, String text){
+    public void typeInto(WebElement element, String text){
         waitToBeVisible(element);
         element.clear();
         element.sendKeys(text);

@@ -3,6 +3,7 @@ package tests.web;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import tests.base.BaseWebTest;
+import web.ProductsPage;
 
 public class LoginTests extends BaseWebTest {
 
@@ -13,24 +14,47 @@ public class LoginTests extends BaseWebTest {
 
     @Test
     public void loginTestErrorMessage() {
+        // Arrange
+
+        // Act
         loginPage.setUsernameField(standard_user);
         loginPage.setPasswordField("error");
         loginPage.clickLoginButton();
         String expectedErrorMessage = loginPage.getLoginErrorMessage();
         String actualErrorMessage = loginPage.getLoginErrorText();
+
+        // Assert
         Assert.assertTrue(loginPage.isLoginErrorDisplayed());
         Assert.assertEquals(actualErrorMessage, expectedErrorMessage);
     }
 
     @Test
     public void lockedOutTestErrorMessage(){
+        // Arrange
+
+        // Act
         loginPage.setUsernameField(locked_out_user);
         loginPage.setPasswordField(password);
         loginPage.clickLoginButton();
         String expectedErrorMessage = loginPage.getLockedOutErrorMessage();
         String actualErrorMessage = loginPage.getLoginErrorText();
+
+        // Assert
         Assert.assertTrue(loginPage.isLoginErrorDisplayed());
         Assert.assertEquals(actualErrorMessage, expectedErrorMessage);
+
+    }
+
+    @Test
+    public void successfulLoginTest(){
+        // Arrange
+        productsPage = new ProductsPage();
+
+        // Act
+        productsPage = loginPage.logIntoProductsPage(standard_user, password);
+
+        // Assert
+        Assert.assertTrue(productsPage.isProductPageHeaderPresent());
 
     }
 }

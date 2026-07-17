@@ -7,6 +7,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import web.BasePage;
 import web.LoginPage;
+import web.ProductsPage;
 
 import java.io.ObjectInputFilter;
 
@@ -15,6 +16,7 @@ public class BaseWebTest {
     protected WebDriver driver;
     protected BasePage basePage;
     protected LoginPage loginPage;
+    protected ProductsPage productsPage;
 
     @BeforeClass
     public void setUp(){
