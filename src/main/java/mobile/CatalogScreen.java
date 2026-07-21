@@ -16,7 +16,7 @@ public class CatalogScreen extends BaseScreen{
     WebElement appHeader;
 
     @AndroidFindBy(accessibility = "View menu")
-    @iOSXCUITFindBy(accessibility = "Menu icons")
+    @iOSXCUITFindBy(accessibility = "More-tab-item")
     WebElement menu;
 
     @AndroidFindBy(accessibility = "Login Menu Item")

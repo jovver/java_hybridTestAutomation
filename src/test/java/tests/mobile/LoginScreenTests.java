@@ -5,7 +5,6 @@ import mobile.LogInScreen;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import tests.base.BaseMobileAppTest;
-import web.LoginPage;
 
 public class LoginScreenTests extends BaseMobileAppTest {
 
