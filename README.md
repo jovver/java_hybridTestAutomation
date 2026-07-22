@@ -43,16 +43,9 @@ src
 
 ## Current Status
 
-- ✅ **Web** — Page Object Model in place, with login and product page coverage against a
-  sample e-commerce site ([saucedemo.com](https://www.saucedemo.com/)).
-- ✅ **Android / iOS** — `AppiumDriverFactory` selects the driver manager for the platform
-  configured in `config.properties` (`mobile.platform`). Initial screen objects and test
-  coverage exist for the catalog and login screens of the Sauce Labs demo app.
-- 🔜 **API** — `BaseAPITest` provides REST Assured request/response spec builders; initial
-  coverage exists for the pet endpoint. Store and user endpoint coverage is still to be added.
-  Since the saucedemo web app and its mobile counterpart don't expose a public API, API tests
-  target a separate service, the [Swagger Petstore](https://petstore.swagger.io/v2), purely to
-  exercise the API layer of the framework.
+- ✅ **Web** — Page Object Model in place, the AUT (Application Under Test) is the sample e-commerce site ([saucedemo.com](https://www.saucedemo.com/)).
+- ✅ **Android / iOS** — `AppiumDriverFactory` selects the driver manager for the platform to be tested on. Uses the my-demo-app of SauceLabs as AUT.
+- ✅ **API** — `BaseAPITest` provides REST Assured request/response spec builders. The [Swagger Petstore](https://petstore.swagger.io/v2) is selected as the AUT (API Under Test)
 - ✅ **Driver management** — `WebDriverFactory` and `AppiumDriverFactory` implement a factory
   pattern, delegating to per-browser/per-platform manager classes.
 - ✅ **Configuration** — Web, mobile, and API settings are externalized to
@@ -123,7 +116,7 @@ mvn test -Dtest=LoginTests
 
 - [x] Add Android test suite using Appium
 - [x] Add iOS test suite using Appium
-- [ ] Expand API test suite using REST Assured (store and user endpoints, data-driven tests)
+- [x] Expand API test suite using REST Assured
 - [ ] Implement test suites in TestNG using XML files (e.g. `testng.xml`) to group and control
   execution of the web, mobile, and API test suites
 - [ ] Add CI pipeline for automated test execution
