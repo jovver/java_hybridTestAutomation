@@ -30,5 +30,6 @@ public class BaseWebSauceDemoTest {
         if(driver != null) {
             driver.quit();
         }
+        BasePage.removeDriver();
     }
 }

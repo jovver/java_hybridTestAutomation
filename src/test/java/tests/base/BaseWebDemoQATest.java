@@ -26,5 +26,6 @@ public class BaseWebDemoQATest {
         if(driver != null) {
             driver.quit();
         }
+        BasePage.removeDriver();
     }
 }
