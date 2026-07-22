@@ -1,11 +1,11 @@
-package tests.web;
+package tests.web.saucedemo;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import tests.base.BaseWebTest;
+import tests.base.BaseWebSauceDemoTest;
 import web.ProductsPage;
 
-public class LoginTests extends BaseWebTest {
+public class LoginTests extends BaseWebSauceDemoTest {
 
     // TODO: Move the user names into a different class or file
     private String password = "secret_sauce";

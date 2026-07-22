@@ -1,10 +1,10 @@
-package tests.web;
+package tests.web.saucedemo;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import tests.base.BaseWebTest;
+import tests.base.BaseWebSauceDemoTest;
 
-public class ProductsTests extends BaseWebTest {
+public class ProductsTests extends BaseWebSauceDemoTest {
 
     // TODO: Put this in a different class or file
     private String password = "secret_sauce";

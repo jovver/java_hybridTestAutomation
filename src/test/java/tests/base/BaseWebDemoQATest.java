@@ -6,25 +6,19 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import web.BasePage;
-import web.LoginPage;
-import web.ProductsPage;
 
-import java.io.ObjectInputFilter;
-
-public class BaseWebTest {
+public class BaseWebDemoQATest {
 
     protected WebDriver driver;
     protected BasePage basePage;
-    protected LoginPage loginPage;
-    protected ProductsPage productsPage;
+    protected String url = "https://demoqa.com/";
 
     @BeforeClass
     public void setUp(){
         driver = new WebDriverFactory().createInstance(ConfigReader.getProperty("web.browser"));
-        driver.get(ConfigReader.getProperty("web.baseUrl"));
+        driver.get(url);
         basePage = new BasePage();
         basePage.setDriver(driver);
-        loginPage = new LoginPage();
     }
 
     @AfterClass
