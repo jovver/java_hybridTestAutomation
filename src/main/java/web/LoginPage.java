@@ -4,20 +4,20 @@ import org.openqa.selenium.By;
 
 public class LoginPage extends BasePage{
 
-    final String loginErrorMessage = "Epic sadface: Username and password do not match any user in this service";
-    final String lockedOutErrorMessage = "Epic sadface: Sorry, this user has been locked out.";
-    final By usernameField = By.id("user-name");
-    final By passwordField = By.id("password");
-    final By loginButton= By.id("login-button");
-    final By loginErrorHeader = By.className("error-message-container");
+    private final By usernameField = By.id("user-name");
+    private final By passwordField = By.id("password");
+    private final By loginButton= By.id("login-button");
+    private final By loginErrorHeader = By.className("error-message-container");
+    private final By loginLogo = By.className("login_logo");
+
 
     // Base Methods
     public String getLoginErrorMessage(){
-        return loginErrorMessage;
+        return "Epic sadface: Username and password do not match any user in this service";
     }
 
     public String getLockedOutErrorMessage(){
-        return lockedOutErrorMessage;
+        return "Epic sadface: Sorry, this user has been locked out.";
     }
 
     public void setUsernameField(String username){
@@ -39,6 +39,10 @@ public class LoginPage extends BasePage{
 
     public String getLoginErrorText(){
         return find(loginErrorHeader).getText();
+    }
+
+    public boolean isLoginLogoDisplayed(){
+        return find(loginLogo).isDisplayed();
     }
 
     // Convenience Methods

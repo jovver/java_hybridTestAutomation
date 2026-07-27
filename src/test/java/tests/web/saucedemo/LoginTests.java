@@ -3,22 +3,18 @@ package tests.web.saucedemo;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import tests.base.BaseWebSauceDemoTest;
+import tests.data.saucedemo.LoginDataProvider;
 import web.ProductsPage;
 
 public class LoginTests extends BaseWebSauceDemoTest {
 
-    // TODO: Move the user names into a different class or file
-    private String password = "secret_sauce";
-    private String standard_user = "standard_user";
-    private String locked_out_user = "locked_out_user";
-
-    @Test
-    public void loginTestErrorMessage() {
+    @Test(dataProviderClass = LoginDataProvider.class, dataProvider = "Error User")
+    public void loginTestErrorMessage(String username, String password) {
         // Arrange
 
         // Act
-        loginPage.setUsernameField(standard_user);
-        loginPage.setPasswordField("error");
+        loginPage.setUsernameField(username);
+        loginPage.setPasswordField(password);
         loginPage.clickLoginButton();
         String expectedErrorMessage = loginPage.getLoginErrorMessage();
         String actualErrorMessage = loginPage.getLoginErrorText();
@@ -28,12 +24,12 @@ public class LoginTests extends BaseWebSauceDemoTest {
         Assert.assertEquals(actualErrorMessage, expectedErrorMessage);
     }
 
-    @Test
-    public void lockedOutTestErrorMessage(){
+    @Test(dataProviderClass = LoginDataProvider.class, dataProvider = "Locked Out User")
+    public void lockedOutTestErrorMessage(String username, String password){
         // Arrange
 
         // Act
-        loginPage.setUsernameField(locked_out_user);
+        loginPage.setUsernameField(username);
         loginPage.setPasswordField(password);
         loginPage.clickLoginButton();
         String expectedErrorMessage = loginPage.getLockedOutErrorMessage();
@@ -45,13 +41,13 @@ public class LoginTests extends BaseWebSauceDemoTest {
 
     }
 
-    @Test
-    public void successfulLoginTest(){
+    @Test(dataProviderClass = LoginDataProvider.class, dataProvider = "Standard User")
+    public void successfulLoginTest(String username, String password){
         // Arrange
         productsPage = new ProductsPage();
 
         // Act
-        productsPage = loginPage.logIntoProductsPage(standard_user, password);
+        productsPage = loginPage.logIntoProductsPage(username, password);
 
         // Assert
         Assert.assertTrue(productsPage.isProductPageHeaderPresent());

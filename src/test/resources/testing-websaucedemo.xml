@@ -1,11 +1,25 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 
-<suite name="Sauce Demo Web Chrome" verbose="1" parallel="classes" thread-count="2">
-    <parameter name="browser" value="chrome"/>
-    <test name="web.saucedemo">
+<suite name="Sauce Demo Web" verbose="1" parallel="classes" thread-count="2">
+    <test name="web.saucedemo.chrome">
+        <parameter name="browser" value="chrome"/>
         <classes>
             <class name="tests.web.saucedemo.LoginTests"/>
             <class name="tests.web.saucedemo.ProductsTests"/>
+        </classes>
+    </test>
+    <test name="web.saucedemo.firefox">
+        <parameter name="browser" value="firefox"/>
+        <classes>
+            <class name="tests.web.saucedemo.LoginTests"/>
+            <!--class name="tests.web.saucedemo.ProductsTests"/-->
+        </classes>
+    </test>
+    <test name="web.saucedemo.safari">
+        <parameter name="browser" value="safari"/>
+        <classes>
+            <class name="tests.web.saucedemo.LoginTests"/>
+            <!--class name="tests.web.saucedemo.ProductsTests"/-->
         </classes>
     </test>
 </suite>

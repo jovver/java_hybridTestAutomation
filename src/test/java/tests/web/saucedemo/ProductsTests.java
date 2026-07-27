@@ -3,19 +3,33 @@ package tests.web.saucedemo;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import tests.base.BaseWebSauceDemoTest;
+import tests.data.saucedemo.LoginDataProvider;
 
 public class ProductsTests extends BaseWebSauceDemoTest {
 
-    // TODO: Put this in a different class or file
-    private String password = "secret_sauce";
-    private String standard_user = "standard_user";
+    @Test(dataProviderClass = LoginDataProvider.class, dataProvider = "Standard User")
+    public void loginToProductsTest(String username, String password) {
+        // Arrange
 
-    @Test
-    public void loginToProductsTest(){
-        loginPage.setUsernameField(standard_user);
+        // Act
+        loginPage.setUsernameField(username);
         loginPage.setPasswordField(password);
         var productPage = loginPage.clickLoginButton();
 
+        // Assert
         Assert.assertTrue(productPage.isProductPageHeaderPresent());
+    }
+
+    @Test(dataProviderClass = LoginDataProvider.class, dataProvider = "Standard User")
+    public void logOutOfApplicationTest(String username, String password) {
+        // Arrange
+
+        // Act
+        var productPage = loginPage.logIntoProductsPage(username, password);
+        productPage.clickMenuButton();
+        var loginPage = productPage.clickLogOutButton();
+
+        // Assert
+        Assert.assertTrue(loginPage.isLoginLogoDisplayed());
     }
 }

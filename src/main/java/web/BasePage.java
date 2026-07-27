@@ -61,4 +61,9 @@ public class BasePage {
         return find(locator).getAttribute(attribute);
     }
 
+    public String getElementText(By locator){
+        waitForElement(locator);
+        return find(locator).getText();
+    }
+
 }

@@ -3,8 +3,7 @@ package tests.base;
 import drivers.config.ConfigReader;
 import drivers.factory.WebDriverFactory;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.*;
 import web.BasePage;
 import web.LoginPage;
 import web.ProductsPage;
@@ -16,20 +15,25 @@ public class BaseWebSauceDemoTest {
     protected LoginPage loginPage;
     protected ProductsPage productsPage;
 
-    @BeforeClass
-    public void setUp(){
-        driver = new WebDriverFactory().createInstance(ConfigReader.getProperty("web.browser"));
+    @BeforeMethod
+    @Parameters("browser")
+    public void setUp(String browser){
+        driver = new WebDriverFactory().createInstance(browser);
         driver.get(ConfigReader.getProperty("web.baseUrl"));
         basePage = new BasePage();
         basePage.setDriver(driver);
         loginPage = new LoginPage();
     }
 
-    @AfterClass
+    @AfterMethod
     public void tearDown(){
         if(driver != null) {
             driver.quit();
         }
+    }
+
+    @AfterClass
+    public void tearDownThread(){
         BasePage.removeDriver();
     }
 }
