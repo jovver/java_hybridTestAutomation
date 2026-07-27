@@ -10,19 +10,29 @@ import java.time.Duration;
 
 public class BasePage {
 
-    protected static WebDriver driver;
+    private static final ThreadLocal<WebDriver> DRIVER = new ThreadLocal<>();
     protected WebDriverWait wait;
     protected static final long DURATION = 10;
 
     // Setter
     public void setDriver(WebDriver driver){
-        BasePage.driver = driver;
+        DRIVER.set(driver);
+    }
+
+    protected WebDriver getDriver(){
+        return DRIVER.get();
+    }
+
+    // Call from @AfterClass once the driver has been quit, to avoid leaking
+    // stale references into threads reused by later test classes.
+    public static void removeDriver(){
+        DRIVER.remove();
     }
 
     // Convenience
     public WebElement find(By locator){
         waitForElement(locator);
-        return driver.findElement(locator);
+        return getDriver().findElement(locator);
     }
 
     public void typeInto(By locator, String value){
@@ -37,18 +47,23 @@ public class BasePage {
     }
 
     public void waitForElement(By locator){
-        wait = new WebDriverWait(driver, Duration.ofSeconds(DURATION));
+        wait = new WebDriverWait(getDriver(), Duration.ofSeconds(DURATION));
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
     public void waitForElementToBeClickable(By locator){
-        wait = new WebDriverWait(driver, Duration.ofSeconds(DURATION));
+        wait = new WebDriverWait(getDriver(), Duration.ofSeconds(DURATION));
         wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
 
     public String getAttribute(By locator, String attribute){
         waitForElement(locator);
         return find(locator).getAttribute(attribute);
+    }
+
+    public String getElementText(By locator){
+        waitForElement(locator);
+        return find(locator).getText();
     }
 
 }

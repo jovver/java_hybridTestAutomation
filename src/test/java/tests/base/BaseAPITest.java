@@ -26,6 +26,10 @@ public class BaseAPITest {
                 build();
     }
 
+    public void setBasePath(String basePath){
+        reqSpec.basePath(basePath);
+    }
+
     public ResponseSpecification assertOKResponse() {
         return respSpec = new ResponseSpecBuilder().
                 expectStatusCode(200).
